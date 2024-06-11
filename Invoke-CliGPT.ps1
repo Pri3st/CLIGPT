@@ -4,7 +4,7 @@ $endpoint = "https://api.openai.com/v1/chat/completions"
 
 # Define the request payload
 $jsonPayload = @{
-    model = "gpt-3.5-turbo-0125"
+    model = "gpt-3.5-turbo"
     messages = @(@{role="user"; content="Say this is a test!"})
     temperature = 0.7
 } | ConvertTo-Json
