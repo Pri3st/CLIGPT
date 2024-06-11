@@ -10,9 +10,6 @@ $jsonPayload = @{
 } | ConvertTo-Json
 $jsonPayload
 
-# Make the API request
-$response = Invoke-RestMethod -Uri $endpoint -Method Post -Headers @{ "Authorization" = "Bearer $apiKey"; "Content-Type" = "application/json" } -Body $jsonPayload
-
 # Print the response
 $response
 try {
