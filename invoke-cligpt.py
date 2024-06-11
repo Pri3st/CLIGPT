@@ -8,7 +8,7 @@ with open('encrypted_api_key.txt', 'rb') as file:
 
 # Initialize the Fernet cipher suite with the decryption key
 # Replace 'your-decryption-key' with your actual decryption key
-decryption_key = b'6a1Qwe9aZg08Hj-BeoZA5c0tw0CjmoIha8KDFDkSY6s='  # The decryption key must be in bytes
+decryption_key = b'<DECRYPTION_KEY>'  # The decryption key must be in bytes
 cipher_suite = Fernet(decryption_key)
 
 # Decrypt the API key
