@@ -1,4 +1,4 @@
-import os
+import os, requests
 from cryptography.fernet import Fernet
 from openai import OpenAI
 
@@ -8,7 +8,7 @@ with open('encrypted_api_key.txt', 'rb') as file:
 
 # Initialize the Fernet cipher suite with the decryption key
 # Replace 'your-decryption-key' with your actual decryption key
-decryption_key = b'<DECRYPTION KEY>'  # The decryption key must be in bytes
+decryption_key = b'6a1Qwe9aZg08Hj-BeoZA5c0tw0CjmoIha8KDFDkSY6s='  # The decryption key must be in bytes
 cipher_suite = Fernet(decryption_key)
 
 # Decrypt the API key
@@ -19,12 +19,18 @@ client = OpenAI(
     api_key=api_key
 )
 
-completion = client.chat.completions.create(
-  model = "gpt-3.5-turbo",
-  messages = [
-    {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "Hello!"},
-  ]
-)
+# Define the API endpoint
+endpoint = "https://api.openai.com/v1/chat/completions"
 
-print(completion.choices[0].message.content.strip())
+# Define the request payload
+payload = {
+    "model": "gpt-3.5-turbo-0125",
+    "messages": [{"role": "user", "content": "Say this is a test!"}],
+    "temperature": 0.7
+}
+
+# Make the API request
+response = requests.post(endpoint, json=payload, headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"})
+
+# Print the response
+print(response.json())
